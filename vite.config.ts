@@ -5,16 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
-      base: '/elite-tendancy-web-1/',
-      build: {
-        outDir: 'dist',
-        assetsDir: 'assets',
-        rollupOptions: {
-          input: {
-            main: path.resolve(__dirname, 'index.html'),
-          },
-        },
-      },
+      base: './',
       server: {
         port: 3000,
         host: '0.0.0.0',
