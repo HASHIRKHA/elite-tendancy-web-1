@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import CustomCursor from './components/CustomCursor';
 import Footer from './components/Footer';
@@ -11,25 +11,20 @@ import PropertiesPage from './pages/PropertiesPage';
 import AboutPage from './pages/AboutPage';
 import InsightsPage from './pages/InsightsPage';
 import ContactPage from './pages/ContactPage';
-import { AnimatePresence } from 'framer-motion';
 
 const AnimatedRoutes: React.FC = () => {
-  const location = useLocation();
-
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/properties" element={<PropertiesPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/insights" element={<InsightsPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/property/:id" element={<PropertyDetails />} />
-        <Route path="/privacy" element={<Legal title="Privacy Policy" type="privacy" />} />
-        <Route path="/terms" element={<Legal title="Terms of Service" type="terms" />} />
-      </Routes>
-    </AnimatePresence>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/services" element={<ServicesPage />} />
+      <Route path="/properties" element={<PropertiesPage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/insights" element={<InsightsPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/property/:id" element={<PropertyDetails />} />
+      <Route path="/privacy" element={<Legal title="Privacy Policy" type="privacy" />} />
+      <Route path="/terms" element={<Legal title="Terms of Service" type="terms" />} />
+    </Routes>
   );
 };
 
