@@ -1,0 +1,39 @@
+name: CI · Build · Smoke · Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (production)
+        run: npm run build
+
+      - name: Smoke test (serve dist + check index)
+        run: |
+          python -m http.server 5000 --directory dist &
+          sleep 1
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/)
+          if [ "$STATUS" != "200" ]; then echo "Smoke test failed (status $STATUS)" && exit 1; fi
+          if ! grep -q "./assets/" dist/index.html; then echo "index.html missing relative assets" && exit 1; fi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
