@@ -1,19 +1,16 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import CustomCursor from './components/CustomCursor';
 import Footer from './components/Footer';
-
-// route-level code splitting — lazy-load pages so initial bundle is smaller
-const Home = React.lazy(() => import('./pages/Home'));
-const PropertyDetails = React.lazy(() => import('./pages/PropertyDetails'));
-const Legal = React.lazy(() => import('./pages/Legal'));
-const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
-const PropertiesPage = React.lazy(() => import('./pages/PropertiesPage'));
-const AboutPage = React.lazy(() => import('./pages/AboutPage'));
-const InsightsPage = React.lazy(() => import('./pages/InsightsPage'));
-const ContactPage = React.lazy(() => import('./pages/ContactPage'));
-
+import Home from './pages/Home';
+import PropertyDetails from './pages/PropertyDetails';
+import Legal from './pages/Legal';
+import ServicesPage from './pages/ServicesPage';
+import PropertiesPage from './pages/PropertiesPage';
+import AboutPage from './pages/AboutPage';
+import InsightsPage from './pages/InsightsPage';
+import ContactPage from './pages/ContactPage';
 import { AnimatePresence } from 'framer-motion';
 
 const AnimatedRoutes: React.FC = () => {
@@ -21,19 +18,17 @@ const AnimatedRoutes: React.FC = () => {
 
   return (
     <AnimatePresence mode="wait">
-      <Suspense fallback={<div className="min-h-[60vh] grid place-items-center">Loading…</div>}>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/properties" element={<PropertiesPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/insights" element={<InsightsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/property/:id" element={<PropertyDetails />} />
-          <Route path="/privacy" element={<Legal title="Privacy Policy" type="privacy" />} />
-          <Route path="/terms" element={<Legal title="Terms of Service" type="terms" />} />
-        </Routes>
-      </Suspense>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/properties" element={<PropertiesPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/insights" element={<InsightsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/property/:id" element={<PropertyDetails />} />
+        <Route path="/privacy" element={<Legal title="Privacy Policy" type="privacy" />} />
+        <Route path="/terms" element={<Legal title="Terms of Service" type="terms" />} />
+      </Routes>
     </AnimatePresence>
   );
 };

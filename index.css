@@ -1,0 +1,181 @@
+/* Base styles - additional custom styles beyond Tailwind */
+:root {
+  --color-obsidian: #070B14;
+  --color-graphite: #121826;
+  --color-platinum: #E5E7EB;
+  --color-gold: #D6B36A;
+  --color-sapphire: #3B82F6;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom cursor for non-touch devices */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-gold);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-gold);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(214, 179, 106, 0.4); 
+  }
+  50% { 
+    box-shadow: 0 0 0 10px rgba(214, 179, 106, 0); 
+  }
+}
+
+/* Utility classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(7, 11, 20, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gold gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #D6B36A 0%, #F4D03F 50%, #D6B36A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Luxury button styles */
+.btn-gold {
+  background: linear-gradient(135deg, #D6B36A 0%, #C9A227 100%);
+  color: #070B14;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #F4D03F 0%, #D6B36A 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(214, 179, 106, 0.4);
+}
+
+/* Card hover effects */
+.card-luxury {
+  background: linear-gradient(145deg, #121826 0%, #0a0d14 100%);
+  border: 1px solid rgba(214, 179, 106, 0.1);
+  transition: all 0.4s ease;
+}
+
+.card-luxury:hover {
+  border-color: rgba(214, 179, 106, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Property card specific */
+.property-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.property-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(214, 179, 106, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.property-card:hover::before {
+  left: 100%;
+}
+
+/* Section spacing */
+.section-padding {
+  padding: 5rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 7rem 2rem;
+  }
+}
+
+/* Text selection */
+::selection {
+  background-color: rgba(214, 179, 106, 0.3);
+  color: white;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070B14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D6B36A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F4D03F;
+}
